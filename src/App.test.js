@@ -1,8 +1,19 @@
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import App from './App';
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+// Mock framer-motion
+jest.mock('framer-motion', () => ({
+  motion: {
+    div: ({ children, ...props }) => <div {...props}>{children}</div>,
+    span: ({ children, ...props }) => <span {...props}>{children}</span>,
+  },
+}));
+
+// Mock react-intersection-observer
+jest.mock('react-intersection-observer', () => ({
+  useInView: () => [null, true],
+}));
+
+test('renders portfolio app without crashing', () => {
+  expect(() => render(<App />)).not.toThrow();
 });
