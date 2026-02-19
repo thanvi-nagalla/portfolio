@@ -1,0 +1,8 @@
+services:
+  - type: web
+    name: thanvi-portfolio
+    env: static
+    branch: main
+    repo: https://github.com/thanvi-nagalla/portfolio
+    buildCommand: npm ci && npm run build
+    staticPublishPath: build
